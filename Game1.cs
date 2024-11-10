@@ -1,51 +1,56 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Abstracts;
 
-namespace hedge_maze;
-
-public class Game1 : Game
+namespace hedge_maze
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-
-    public Game1()
+    public class Game1 : Game
     {
-        _graphics = new GraphicsDeviceManager(this);
-        Content.RootDirectory = "Content";
-        IsMouseVisible = true;
-    }
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Cell _cell;
 
-    protected override void Initialize()
-    {
-        // TODO: Add your initialization logic here
+        public Game1()
+        {
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1280,
+                PreferredBackBufferHeight = 720
+            };
 
-        base.Initialize();
-    }
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+        }
 
-    protected override void LoadContent()
-    {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        protected override void Initialize()
+        {
+            _cell = new Cell(GraphicsDevice);
+            base.Initialize();
+        }
 
-        // TODO: use this.Content to load your game content here
-    }
+        protected override void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+        }
 
-    protected override void Update(GameTime gameTime)
-    {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
 
-        // TODO: Add your update logic here
+            base.Update(gameTime);
+        }
 
-        base.Update(gameTime);
-    }
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
 
-    protected override void Draw(GameTime gameTime)
-    {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+            _spriteBatch.Begin();
+            _cell.Draw(_spriteBatch);
+            _spriteBatch.End();
 
-        // TODO: Add your drawing code here
-
-        base.Draw(gameTime);
+            base.Draw(gameTime);
+        }
     }
 }
