@@ -1,0 +1,7 @@
+# Ignore all files and folders in bin and obj directories
+[Bb]in/
+[Oo]bj/
+
+# For extra certainty, also ignore any bin/obj folders in subdirectories
+**/[Bb]in/
+**/[Oo]bj/
