@@ -9,14 +9,13 @@ namespace hedge_maze
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Cell _cell;
-
+        private Grid _grid;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 1280,
-                PreferredBackBufferHeight = 720
+                PreferredBackBufferWidth = 898,
+                PreferredBackBufferHeight = 798
             };
 
             Content.RootDirectory = "Content";
@@ -25,7 +24,7 @@ namespace hedge_maze
 
         protected override void Initialize()
         {
-            _cell = new Cell(GraphicsDevice);
+            _grid = new Grid(GraphicsDevice);
             base.Initialize();
         }
 
@@ -47,7 +46,7 @@ namespace hedge_maze
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            _cell.Draw(_spriteBatch);
+            _grid.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

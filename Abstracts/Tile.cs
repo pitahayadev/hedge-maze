@@ -17,7 +17,8 @@ namespace Abstracts
             this.X = X;
             this.Y = Y;
             this.Color = Color;
-            texture = new Texture2D(graphicsDevice, 1, 1);
+            this.texture = new Texture2D(graphicsDevice, 1, 1);
+            
             texture.SetData(new[] { Color.White });
         }
 
