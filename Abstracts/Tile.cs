@@ -5,12 +5,12 @@ namespace Abstracts
 {
     public class Tile
     {
+        private Texture2D texture;
         public int X { get; set; }
         public int Y { get; set; }
+        public Color Color { get; set; }
         public static int WIDTH = 16;
         public static int HEIGHT = 16;
-        public Color Color { get; set; }
-        private Texture2D texture;
         
         public Tile(GraphicsDevice graphicsDevice, int X, int Y, Color Color)
         {
