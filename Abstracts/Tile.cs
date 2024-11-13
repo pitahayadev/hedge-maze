@@ -26,5 +26,10 @@ namespace Abstracts
         {
             spriteBatch.Draw(texture, new Rectangle(X, Y, Tile.WIDTH, Tile.HEIGHT), Color);
         }
+
+        public void ChangeColor(Color color)
+        {
+            texture.SetData(new[] { color });
+        }
     }
 }

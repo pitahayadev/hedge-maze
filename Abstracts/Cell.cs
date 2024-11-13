@@ -32,5 +32,13 @@ namespace Abstracts
                 tile.Draw(spriteBatch);
             }
         }
+
+        public void ChangeColor(Color color)
+        {
+            foreach (Tile tile in Tiles)
+            {
+                tile.ChangeColor(color);
+            }
+        }
     }
 }
