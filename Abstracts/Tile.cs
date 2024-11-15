@@ -5,31 +5,26 @@ namespace Abstracts
 {
     public class Tile
     {
-        private Texture2D texture;
+        private Texture2D _texture;
         public int X { get; set; }
         public int Y { get; set; }
         public Color Color { get; set; }
-        public static int WIDTH = 16;
-        public static int HEIGHT = 16;
-        
-        public Tile(GraphicsDevice graphicsDevice, int X, int Y, Color Color)
+        public static int WIDTH = 4;
+        public static int HEIGHT = 4;
+
+        public Tile(GraphicsDevice graphicsDevice, int x, int y, Color color)
         {
-            this.X = X;
-            this.Y = Y;
-            this.Color = Color;
-            this.texture = new Texture2D(graphicsDevice, 1, 1);
+            X = x;
+            Y = y;
+            Color = color;
             
-            texture.SetData(new[] { Color.White });
+            _texture = new Texture2D(graphicsDevice, 1, 1);
+            _texture.SetData(new[] { Color });
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle(X, Y, Tile.WIDTH, Tile.HEIGHT), Color);
-        }
-
-        public void ChangeColor(Color color)
-        {
-            texture.SetData(new[] { color });
+            spriteBatch.Draw(_texture, new Rectangle(X, Y, WIDTH, HEIGHT), Color);
         }
     }
 }

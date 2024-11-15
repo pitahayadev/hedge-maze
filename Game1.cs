@@ -24,7 +24,7 @@ namespace hedge_maze
 
         protected override void Initialize()
         {
-            _grid = new Grid(GraphicsDevice);
+            _grid = new Grid(GraphicsDevice, 18, 16);
             base.Initialize();
         }
 
