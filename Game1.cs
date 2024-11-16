@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Abstracts;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Abstracts;
 
 namespace hedge_maze
 {
@@ -9,7 +9,8 @@ namespace hedge_maze
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Grid _grid;
+        private Tile _tile;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this)
@@ -24,7 +25,7 @@ namespace hedge_maze
 
         protected override void Initialize()
         {
-            _grid = new Grid(GraphicsDevice, 18, 16);
+            _tile = new Tile(GraphicsDevice, Color.Coral, 8, 16);
             base.Initialize();
         }
 
@@ -44,11 +45,7 @@ namespace hedge_maze
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            _spriteBatch.Begin();
-            _grid.Draw(_spriteBatch);
-            _spriteBatch.End();
-
+            _tile.Draw();
             base.Draw(gameTime);
         }
     }

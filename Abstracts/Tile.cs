@@ -1,30 +1,70 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Abstracts
 {
-    public class Tile
+    public class Tile : IDisposable
     {
-        private Texture2D _texture;
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Color Color { get; set; }
-        public static int WIDTH = 4;
-        public static int HEIGHT = 4;
+        private GraphicsDevice _graphics;
+        private VertexBuffer _render;
+        private BasicEffect _window;
+        public VertexPositionColor[] _pixels { get; }
+        public static int WIDTH = 2;
+        public static int HEIGHT = 2;
 
-        public Tile(GraphicsDevice graphicsDevice, int x, int y, Color color)
+        public Tile(GraphicsDevice graphics, Color color, int w, int h)
         {
-            X = x;
-            Y = y;
-            Color = color;
+            _graphics = graphics;
+            _pixels = new VertexPositionColor[4];
             
-            _texture = new Texture2D(graphicsDevice, 1, 1);
-            _texture.SetData(new[] { Color });
+            for (int i = 0; i < _pixels.Length; i++)
+            {
+                int x = i % WIDTH;
+                int y = i / WIDTH;
+                _pixels[i] = new VertexPositionColor(
+                    new Vector3(x + w, y + h + 1, 0),
+                    color);
+            }
+            
+            _render = new VertexBuffer(graphics,
+                typeof(VertexPositionColor),
+                _pixels.Length,
+                BufferUsage.WriteOnly);
+
+            _render.SetData(_pixels);
+            
+            _window = new BasicEffect(graphics)
+            {
+                VertexColorEnabled = true,
+                Projection = Matrix.CreateOrthographicOffCenter(
+                    0, _graphics.Viewport.Width, _graphics.Viewport.Height, 0, 0, 1)
+            };
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void ChangeColor(Color color)
         {
-            spriteBatch.Draw(_texture, new Rectangle(X, Y, WIDTH, HEIGHT), Color);
+            for (int i = 0; i < _pixels.Length; i++)
+            {
+                _pixels[i].Color = color;
+            }
+            _render.SetData(_pixels);
+        }
+
+        public void Draw()
+        {
+            _graphics.SetVertexBuffer(_render);
+            foreach (var pass in _window.CurrentTechnique.Passes)
+            {
+                pass.Apply();
+                _graphics.DrawPrimitives(PrimitiveType.PointList, 0, _pixels.Length);
+            }
+        }
+
+        public void Dispose()
+        {
+            _render?.Dispose();
+            _window?.Dispose();
         }
     }
 }
