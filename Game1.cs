@@ -9,7 +9,7 @@ namespace hedge_maze
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Tile _tile;
+        private Cell _cell;
 
         public Game1()
         {
@@ -25,7 +25,7 @@ namespace hedge_maze
 
         protected override void Initialize()
         {
-            _tile = new Tile(GraphicsDevice, Color.Coral, 8, 16);
+            _cell = new Cell(GraphicsDevice, new Vector2(2, 2));
             base.Initialize();
         }
 
@@ -45,7 +45,7 @@ namespace hedge_maze
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _tile.Draw();
+            _cell.Draw();
             base.Draw(gameTime);
         }
     }
