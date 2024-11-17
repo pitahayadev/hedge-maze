@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Abstracts
 {
-    public class Grid
+    public class Grid : IDisposable
     {
         public int Width { get; set; }
         public int Height { get; set; }
@@ -26,15 +26,27 @@ namespace Abstracts
                     Cells[i, j] = new Cell(graphicsDevice, position);
                 }
             }
-            /* Cells[(int)_entry.X, (int)_entry.Y].ChangeColor(Color.Black);
-            Cells[(int)_exit.X, (int)_exit.Y].ChangeColor(Color.Gray); */
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            foreach (Cell cell in Cells)
+            for (int i = 0; i < Width; i++)
             {
-                cell.Draw(spriteBatch);
+                for (int j = 0; j < Height; j++)
+                {
+                    Cells[i, j].Draw();
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    Cells[i, j].Dispose();
+                }
             }
         }
     }

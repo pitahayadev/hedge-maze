@@ -1,7 +1,7 @@
-﻿using Abstracts;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Abstracts;
 
 namespace hedge_maze
 {
@@ -9,7 +9,7 @@ namespace hedge_maze
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Cell _cell;
+        private Grid _grid;
 
         public Game1()
         {
@@ -21,17 +21,26 @@ namespace hedge_maze
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            // TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 30.0);
+            // IsFixedTimeStep = true;
+            Exiting += OnExiting;
         }
 
         protected override void Initialize()
         {
-            _cell = new Cell(GraphicsDevice, new Vector2(2, 2));
+            _grid = new Grid(GraphicsDevice, 18, 16);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+        }
+
+        protected override void UnloadContent()
+        {
+            _grid.Dispose();
+            base.UnloadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,8 +54,15 @@ namespace hedge_maze
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _cell.Draw();
+            _spriteBatch.Begin();
+            _grid.Draw();
+            _spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void OnExiting(object sender, System.EventArgs e)
+        {
+            _grid.Dispose();
         }
     }
 }

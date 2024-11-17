@@ -65,6 +65,12 @@ namespace Abstracts
         {
             _render?.Dispose();
             _window?.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        ~Tile()
+        {
+            Dispose();
         }
     }
 }
