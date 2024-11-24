@@ -28,18 +28,17 @@ namespace hedge_maze
 
         protected override void Initialize()
         {
-            _grid = new Grid(GraphicsDevice, 18, 16);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _grid = new Grid(GraphicsDevice, 18, 16);
         }
 
         protected override void UnloadContent()
         {
-            _grid.Dispose();
             base.UnloadContent();
         }
 
@@ -55,14 +54,14 @@ namespace hedge_maze
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            _grid.Draw();
+            _grid.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
 
         private void OnExiting(object sender, System.EventArgs e)
         {
-            _grid.Dispose();
+            
         }
     }
 }

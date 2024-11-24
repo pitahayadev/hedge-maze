@@ -1,0 +1,36 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using static Abstracts.IPathable;
+
+namespace Abstracts
+{
+    public class BottomRight : Cell
+    {
+        public BottomRight(GraphicsDevice graphicsDevice, Vector2 position, Color color) : base(graphicsDevice, position, color)
+        {
+            Walls = new Vector4(Walls.X, 1, 1, Walls.W);
+        }
+        
+        public override bool Can(Direction direction)
+        {
+            return direction != Direction.Down || direction != Direction.Left;
+        }
+        
+        public override void Open(Direction direction)
+        {
+            switch(direction)
+            {
+                case Direction.Up:
+                    Walls.X = 0;
+                    break;
+                case Direction.Right:
+                    return;
+                case Direction.Down:
+                    return;
+                case Direction.Left:
+                    Walls.W = 0;
+                    break;
+            }
+        }
+    }
+}

@@ -1,62 +1,40 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static Abstracts.IPathable;
 
 namespace Abstracts
 {
-    public class Cell : IDisposable
+    public abstract class Cell : IPathable
     {
         public Vector2 Position { get; set; }
+        public Vector4 Walls;
         public Tile[,] Tiles { get; set; }
-        public int Size { get; set; }
-        public static int WIDTH = Tile.WIDTH * 24;
-        public static int HEIGHT = Tile.HEIGHT * 24;
+        public static Vector2[] MOVE =
+        [
+            new Vector2(0, -1),
+            new Vector2(1, 0),
+            new Vector2(0, 1),
+            new Vector2(-1, 0)
+        ];
+        public static int SIZE { get; set; } = 24;
+        public static int WIDTH = Tile.WIDTH * SIZE;
+        public static int HEIGHT = Tile.HEIGHT * SIZE;
         
-        public Cell(GraphicsDevice graphicsDevice, Vector2 position, int size = 24)
+        public Cell(GraphicsDevice graphicsDevice, Vector2 position, Color color)
         {
             Position = position;
-            Size = size;
-            Tiles = new Tile[Size, Size];
-            for (int i = 0; i < Size; i++)
+            Walls = new Vector4(1, 1, 1, 1);
+            Tiles = new Tile[SIZE, SIZE];
+            
+            for (int x = 0; x < SIZE; x++)
             {
-                for (int j = 0; j < Size; j++)
+                for (int y = 0; y < SIZE; y++)
                 {
-                    Color color = Color.White;
-                    Tiles[i, j] = new Tile(graphicsDevice, color, (int)Position.X + i * Tile.WIDTH, (int)Position.Y + j * Tile.HEIGHT);
+                    Tiles[x, y] = new Tile(graphicsDevice, (int)Position.X + x * Tile.WIDTH, (int)Position.Y + y * Tile.HEIGHT, color);
                 }
             }
         }
-        
-        public void Draw()
-        {
-            foreach (Tile tile in Tiles)
-            {
-                tile.Draw();
-            }
-        }
-        
-        public void ChangeColor(int[] tiles, Color color)
-        {
-            foreach (int i in tiles)
-            {
-                int x = i % Size;
-                int y = i / Size;
-                if (x >= 0 && x < Size && y >= 0 && y < Size)
-                {
-                    Tiles[x, y].ChangeColor(color);
-                }
-            }
-        }
-
-        public void Dispose()
-        {
-            for (int i = 0; i < Size; i++)
-            {
-                for (int j = 0; j < Size; j++)
-                {
-                    Tiles[i, j].Dispose();
-                }
-            }
-        }
+        public abstract bool Can(Direction direction);
+        public abstract void Open(Direction direction);
     }
 }
