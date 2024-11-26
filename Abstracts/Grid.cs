@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Abstracts
 {
@@ -9,7 +8,7 @@ namespace Abstracts
         public int Height { get; set; }
         public Cell[,] Cells { get; set; }
         
-        public Grid(GraphicsDevice graphicsDevice, int width, int height)
+        public Grid(int width, int height)
         {
             Width = width;
             Height = height;
@@ -22,20 +21,14 @@ namespace Abstracts
                     // int index = (i * Width) + j;
                     // without walls: (8 + i * Cell.WIDTH, 8 + j * Cell.HEIGHT)
                     Vector2 position = new Vector2(i + 8 + i * Cell.WIDTH, j + 8 + j * Cell.HEIGHT);
-                    Cells[i, j] = Factory.Instantiate(graphicsDevice, position);
+                    Cells[i, j] = Factory.Instantiate(position);
                 }
             }
         }
-        
-        public void Draw(SpriteBatch spriteBatch)
+
+        public Cell Get(int x, int y)
         {
-            foreach (Cell cell in Cells)
-            {
-                foreach (Tile tile in cell.Tiles)
-                {
-                    tile.Draw(spriteBatch);
-                }
-            }
+            return Cells[x, y];
         }
     }
 }

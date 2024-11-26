@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using static Abstracts.IPathable;
 
 namespace Abstracts
@@ -20,17 +19,19 @@ namespace Abstracts
         public static int WIDTH = Tile.WIDTH * SIZE;
         public static int HEIGHT = Tile.HEIGHT * SIZE;
         
-        public Cell(GraphicsDevice graphicsDevice, Vector2 position, Color color)
+        public Cell(Vector2 position)
         {
             Position = position;
             Walls = new Vector4(1, 1, 1, 1);
             Tiles = new Tile[SIZE, SIZE];
             
-            for (int x = 0; x < SIZE; x++)
+            for (int i = 0; i < SIZE; i++)
             {
-                for (int y = 0; y < SIZE; y++)
+                for (int j = 0; j < SIZE; j++)
                 {
-                    Tiles[x, y] = new Tile(graphicsDevice, (int)Position.X + x * Tile.WIDTH, (int)Position.Y + y * Tile.HEIGHT, color);
+                    int x = (int)Position.X + i * Tile.WIDTH;
+                    int y = (int)Position.Y + j * Tile.HEIGHT;
+                    Tiles[x, y] = new Tile(new Vector2(x, y));
                 }
             }
         }

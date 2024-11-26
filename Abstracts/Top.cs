@@ -1,12 +1,11 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using static Abstracts.IPathable;
 
 namespace Abstracts
 {
     public class Top : Cell
     {
-        public Top(GraphicsDevice graphicsDevice, Vector2 position, Color color) : base(graphicsDevice, position, color)
+        public Top(Vector2 position) : base(position)
         {
             Walls = new Vector4(1, Walls.Y, Walls.Z, Walls.W);
         }
