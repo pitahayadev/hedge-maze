@@ -1,28 +1,26 @@
-using Microsoft.Xna.Framework;
-
 namespace Abstracts
 {
     public static class Factory
     {
-        public static Cell Instantiate(Vector2 position)
+        public static Cell Instantiate(int x, int y)
         {
-            if (position.X == 0)
+            if (x == 0)
             {
-                if (position.Y == 0) return new TopLeft(position);
-                if (position.Y == 15) return new BottomLeft(position);
-                return new Left(position);
+                if (y == 0) return new TopLeft(x, y);
+                if (y == 15) return new BottomLeft(x, y);
+                return new Left(x, y);
             }
 
-            if (position.X == 17)
+            if (x == 17)
             {
-                if (position.Y == 0) return new TopRight(position);
-                if (position.Y == 15) return new BottomRight(position);
-                return new Right(position);
+                if (y == 0) return new TopRight(x, y);
+                if (y == 15) return new BottomRight(x, y);
+                return new Right(x, y);
             }
 
-            if (position.Y == 0) return new Top(position);
-            if (position.Y == 15) return new Bottom(position);
-            return new Inner(position);
+            if (y == 0) return new Top(x, y);
+            if (y == 15) return new Bottom(x, y);
+            return new Inner(x, y);
         }
     }
 }

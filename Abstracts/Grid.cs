@@ -20,8 +20,9 @@ namespace Abstracts
                 {
                     // int index = (i * Width) + j;
                     // without walls: (8 + i * Cell.WIDTH, 8 + j * Cell.HEIGHT)
-                    Vector2 position = new Vector2(i + 8 + i * Cell.WIDTH, j + 8 + j * Cell.HEIGHT);
-                    Cells[i, j] = Factory.Instantiate(position);
+                    int x = i + 8 + i * Cell.WIDTH;
+                    int y = j + 8 + j * Cell.HEIGHT;
+                    Cells[i, j] = Factory.Instantiate(x, y);
                 }
             }
         }

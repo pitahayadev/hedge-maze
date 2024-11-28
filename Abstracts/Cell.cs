@@ -19,19 +19,15 @@ namespace Abstracts
         public static int WIDTH = Tile.WIDTH * SIZE;
         public static int HEIGHT = Tile.HEIGHT * SIZE;
         
-        public Cell(Vector2 position)
+        public Cell(int x, int y)
         {
-            Position = position;
-            Walls = new Vector4(1, 1, 1, 1);
+            Position = new Vector2(x, y);
             Tiles = new Tile[SIZE, SIZE];
-            
             for (int i = 0; i < SIZE; i++)
             {
                 for (int j = 0; j < SIZE; j++)
                 {
-                    int x = (int)Position.X + i * Tile.WIDTH;
-                    int y = (int)Position.Y + j * Tile.HEIGHT;
-                    Tiles[x, y] = new Tile(new Vector2(x, y));
+                    Tiles[i, j] = new Tile((int)Position.X + i * Tile.WIDTH, (int)Position.Y + j * Tile.HEIGHT);
                 }
             }
         }

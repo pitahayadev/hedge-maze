@@ -5,7 +5,7 @@ namespace Abstracts
 {
     public class Top : Cell
     {
-        public Top(Vector2 position) : base(position)
+        public Top(int x, int y) : base(x, y)
         {
             Walls = new Vector4(1, Walls.Y, Walls.Z, Walls.W);
         }

@@ -8,8 +8,8 @@ namespace hedge_maze
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         private Grid _grid;
+        private Editor _editor;
 
         public Game1()
         {
@@ -33,8 +33,8 @@ namespace hedge_maze
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _grid = new Grid(GraphicsDevice, 18, 16);
+            _grid = new Grid(4, 4);
+            _editor = new Editor(GraphicsDevice);
         }
 
         protected override void UnloadContent()
@@ -53,9 +53,7 @@ namespace hedge_maze
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _spriteBatch.Begin();
-            _grid.Draw(_spriteBatch);
-            _spriteBatch.End();
+            _editor.Vectorize(_grid);
             base.Draw(gameTime);
         }
 

@@ -4,13 +4,13 @@ namespace Abstracts
 {
     public class Tile
     {
-        public Vector2 Position { get; set; }
+        public Rectangle square { get; set; }
         public static int WIDTH = 2;
         public static int HEIGHT = 2;
 
-        public Tile(Vector2 position)
+        public Tile(int x, int y)
         {
-            Position = position;
+            square = new Rectangle(x, y, WIDTH, HEIGHT);
         }
     }
 }

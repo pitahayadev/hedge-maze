@@ -5,7 +5,7 @@ namespace Abstracts
 {
     public class Right : Cell
     {
-        public Right(Vector2 position) : base(position)
+        public Right(int x, int y) : base(x, y)
         {
             Walls = new Vector4(Walls.X, 1, Walls.Z, Walls.W);
         }
