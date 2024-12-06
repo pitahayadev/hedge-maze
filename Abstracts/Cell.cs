@@ -15,7 +15,7 @@ namespace Abstracts
             new Vector2(0, 1),
             new Vector2(-1, 0)
         ];
-        public static int SIZE { get; set; } = 24;
+        public static int SIZE { get; set; } = 32;
         public static int WIDTH = Tile.WIDTH * SIZE;
         public static int HEIGHT = Tile.HEIGHT * SIZE;
         
@@ -31,6 +31,7 @@ namespace Abstracts
                 }
             }
         }
+
         public abstract bool Can(Direction direction);
         public abstract void Open(Direction direction);
     }

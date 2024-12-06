@@ -15,12 +15,13 @@ namespace hedge_maze
         {
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 898,
-                PreferredBackBufferHeight = 798
+                PreferredBackBufferWidth = 1186,
+                PreferredBackBufferHeight = 1056
             };
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Window.AllowUserResizing = true;
             // TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 30.0);
             // IsFixedTimeStep = true;
             Exiting += OnExiting;
@@ -33,7 +34,7 @@ namespace hedge_maze
 
         protected override void LoadContent()
         {
-            _grid = new Grid(4, 4);
+            _grid = new Grid(18, 16);
             _editor = new Editor(GraphicsDevice);
         }
 

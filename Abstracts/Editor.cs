@@ -26,17 +26,18 @@ namespace Abstracts
                     Cell cell  = grid.Get(i, j);
                     foreach (Tile tile in cell.Tiles)
                     {
-                        _spriteBatch.Draw(_texture, tile.square, Color.Gold);
+                        SingleTile(tile.X, tile.Y, Color.DarkGoldenrod);
                     }
                 }
             }
+            
             _spriteBatch.End();
         }
 
-        public void TilePen(int x, int y, Color color)
+        private void SingleTile(int x, int y, Color color)
         {
-            Tile tile = new Tile(8 + x, 8 + y);
-            _spriteBatch.Draw(_texture, tile.square, color);
+            Tile tile = new Tile(x, y);
+            _spriteBatch.Draw(_texture, new Rectangle(tile.X, tile.Y, Tile.WIDTH, Tile.HEIGHT), color);
         }
     }
 }
