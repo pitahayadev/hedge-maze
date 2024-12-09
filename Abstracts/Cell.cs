@@ -8,13 +8,6 @@ namespace Abstracts
         public Vector2 Position { get; set; }
         public Vector4 Walls;
         public Tile[,] Tiles { get; set; }
-        public static Vector2[] MOVE =
-        [
-            new Vector2(0, -1),
-            new Vector2(1, 0),
-            new Vector2(0, 1),
-            new Vector2(-1, 0)
-        ];
         public static int SIZE { get; set; } = 32;
         public static int WIDTH = Tile.WIDTH * SIZE;
         public static int HEIGHT = Tile.HEIGHT * SIZE;
