@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace Abstracts
@@ -31,47 +32,64 @@ namespace Abstracts
             else
             {
                 Stack<Cell> stack = new Stack<Cell>();
-                Vector2 vposition = InitialPosition();
-                Cell first = _grid.Get((int)vposition.X, (int)vposition.Y);
+                int x = Random.Shared.Next(_grid.Width);
+                int y = Random.Shared.Next(_grid.Height);
+                Cell first = _grid.Get(x, y);
                 stack.Push(first);
-
+                
                 while(stack.Count > 0)
                 {
                     Cell curr_cell = stack.Peek();
-                    int curr_index = (int)curr_cell.Position.X + (int)curr_cell.Position.Y * _grid.Width;
+                    int curr_index = Iterator(curr_cell);
+                    List<Direction> availables = UnvisitedAdjacents(curr_cell, curr_index);
+                    Direction direction;
+                    if (availables.Count == 0)
+                    {
+                        stack.Pop();
+                        continue;
+                    }
+                    else if (availables.Count == 1)
+                    {
+                        direction = availables.ElementAt(0);
+                    }
+                    else
+                    {
+                        int selected = Random.Shared.Next(availables.Count);
+                        direction = availables.ElementAt(selected);
+                    }
 
+                    Vector2 next_pos = curr_cell.Position + MOVE[(int)direction];
+                    Cell next_cell = _grid.Get((int)next_pos.X, (int)next_pos.Y);
+
+                    curr_cell.Open(direction);
+                    Direction opposite = (Direction)(((int)direction + 2) % 4);
+                    next_cell.Open(opposite);
+
+                    stack.Push(next_cell);
                 }
             }
         }
-
-        // private List<Direction> Go(Cell cell)
-        // {
-        //     int position = (int)cell.Position.X + (int)cell.Position.Y * _grid.Width;
-        // }
-
-        private List<Direction> Can(Cell cell)
+        
+        private List<Direction> UnvisitedAdjacents(Cell cell, int iterator)
         {
-            List<Direction> adjacents = new List<Direction>();
-            bool[] array =
+            List<Direction> unvisited = new List<Direction>();
+            bool[] adjacents =
             [
                 cell.Can(Direction.Up),
                 cell.Can(Direction.Right),
                 cell.Can(Direction.Down),
                 cell.Can(Direction.Left)
             ];
-            if (array[0]) adjacents.Add(Direction.Up);
-            if (array[1]) adjacents.Add(Direction.Right);
-            if (array[2]) adjacents.Add(Direction.Down);
-            if (array[3]) adjacents.Add(Direction.Left);
-            return adjacents;
+            if (adjacents[0] && !_visited[iterator - _grid.Width]) unvisited.Add(Direction.Up);
+            if (adjacents[1] && !_visited[iterator + 1]) unvisited.Add(Direction.Right);
+            if (adjacents[2] && !_visited[iterator + _grid.Width]) unvisited.Add(Direction.Down);
+            if (adjacents[3] && !_visited[iterator - 1]) unvisited.Add(Direction.Left);
+            return unvisited;
         }
 
-        private Vector2 InitialPosition()
+        private int Iterator(Cell cell)
         {
-            Random random = new Random();
-            int x = random.Next(_grid.Width);
-            int y = random.Next(_grid.Height);
-            return new Vector2(x, y);
+            return (int)cell.Position.X / Cell.WIDTH + (int)cell.Position.Y / Cell.HEIGHT * _grid.Width;
         }
     }
 }

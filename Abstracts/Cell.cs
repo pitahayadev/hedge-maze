@@ -16,6 +16,8 @@ namespace Abstracts
         {
             Position = new Vector2(x, y);
             Tiles = new Tile[SIZE, SIZE];
+            Walls = new Vector4(1, 1, 1, 1);
+            
             for (int i = 0; i < SIZE; i++)
             {
                 for (int j = 0; j < SIZE; j++)

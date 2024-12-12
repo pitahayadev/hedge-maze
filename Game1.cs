@@ -10,6 +10,7 @@ namespace hedge_maze
         private GraphicsDeviceManager _graphics;
         private Grid _grid;
         private Editor _editor;
+        private Maze _maze;
 
         public Game1()
         {
@@ -35,6 +36,8 @@ namespace hedge_maze
         protected override void LoadContent()
         {
             _grid = new Grid(18, 16);
+            _maze = new Maze(_grid);
+            _maze.Backtrack();
             _editor = new Editor(GraphicsDevice);
         }
 

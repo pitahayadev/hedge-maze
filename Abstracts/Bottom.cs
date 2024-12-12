@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using static Abstracts.IPathable;
 
 namespace Abstracts
 {

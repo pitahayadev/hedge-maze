@@ -25,7 +25,26 @@ namespace Abstracts
                     Cell cell  = grid.Get(i, j);
                     foreach (Tile tile in cell.Tiles)
                     {
-                        SingleTile(tile.X, tile.Y, Color.DarkGoldenrod);
+                        if(cell.Walls.X == 1 && tile.Y == cell.Position.Y)
+                        {
+                            SingleTile(tile.X, tile.Y, Color.Red);
+                        }
+                        else if(cell.Walls.Y == 1 && tile.X == cell.Position.X + Cell.WIDTH - Tile.WIDTH)
+                        {
+                            SingleTile(tile.X, tile.Y, Color.Blue);
+                        }
+                        else if(cell.Walls.Z == 1 && tile.Y == cell.Position.Y + Cell.HEIGHT - Tile.HEIGHT)
+                        {
+                            SingleTile(tile.X, tile.Y, Color.Yellow);
+                        }
+                        else if(cell.Walls.W == 1 && tile.X == cell.Position.X)
+                        {
+                            SingleTile(tile.X, tile.Y, Color.White);
+                        }
+                        else
+                        {
+                            SingleTile(tile.X, tile.Y, Color.LimeGreen);
+                        }
                     }
                 }
             }

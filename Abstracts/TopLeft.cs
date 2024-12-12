@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using static Abstracts.IPathable;
 
 namespace Abstracts
 {
@@ -20,7 +19,7 @@ namespace Abstracts
             switch(direction)
             {
                 case Direction.Up:
-                    return;
+                    break;
                 case Direction.Right:
                     Walls.Y = 0;
                     break;
@@ -28,7 +27,7 @@ namespace Abstracts
                     Walls.Z = 0;
                     break;
                 case Direction.Left:
-                    return;
+                    break;
             }
         }
     }
