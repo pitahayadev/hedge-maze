@@ -22,7 +22,7 @@ namespace Abstracts
                     Walls.X = 0;
                     break;
                 case Direction.Right:
-                    return;
+                    break;
                 case Direction.Down:
                     Walls.Z = 0;
                     break;

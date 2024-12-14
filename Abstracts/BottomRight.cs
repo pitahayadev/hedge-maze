@@ -22,9 +22,9 @@ namespace Abstracts
                     Walls.X = 0;
                     break;
                 case Direction.Right:
-                    return;
+                    break;
                 case Direction.Down:
-                    return;
+                    break;
                 case Direction.Left:
                     Walls.W = 0;
                     break;

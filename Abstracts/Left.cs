@@ -28,7 +28,7 @@ namespace Abstracts
                     Walls.Z = 0;
                     break;
                 case Direction.Left:
-                    return;
+                    break;
             }
         }
     }

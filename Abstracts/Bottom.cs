@@ -25,7 +25,7 @@ namespace Abstracts
                     Walls.Y = 0;
                     break;
                 case Direction.Down:
-                    return;
+                    break;
                 case Direction.Left:
                     Walls.W = 0;
                     break;
