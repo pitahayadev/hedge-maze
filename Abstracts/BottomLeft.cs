@@ -11,7 +11,7 @@ namespace Abstracts
         
         public override bool Can(Direction direction)
         {
-            return direction != Direction.Down || direction != Direction.Left;
+            return direction != Direction.Down && direction != Direction.Left;
         }
         
         public override void Open(Direction direction)

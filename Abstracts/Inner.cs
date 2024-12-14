@@ -8,12 +8,9 @@ namespace Abstracts
         {
             Walls = new Vector4(Walls.X, Walls.Y, Walls.Z, Walls.W);
         }
-        
-        public override bool Can(Direction direction)
-        {
-            return Position.X > 0 && Position.X < Cell.WIDTH && Position.Y > 0 && Position.Y < Cell.HEIGHT;
-        }
-        
+
+        public override bool Can(Direction direction) => true;
+
         public override void Open(Direction direction)
         {
             switch(direction)

@@ -16,8 +16,8 @@ namespace hedge_maze
         {
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 1186,
-                PreferredBackBufferHeight = 1056
+                PreferredBackBufferWidth = 1168,
+                PreferredBackBufferHeight = 1040
             };
 
             Content.RootDirectory = "Content";

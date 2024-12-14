@@ -41,6 +41,7 @@ namespace Abstracts
                 {
                     Cell curr_cell = stack.Peek();
                     int curr_index = Iterator(curr_cell);
+                    _visited[curr_index] = true;
                     List<Direction> availables = UnvisitedAdjacents(curr_cell, curr_index);
                     Direction direction;
                     if (availables.Count == 0)
@@ -58,8 +59,11 @@ namespace Abstracts
                         direction = availables.ElementAt(selected);
                     }
 
-                    Vector2 next_pos = curr_cell.Position + MOVE[(int)direction];
-                    Cell next_cell = _grid.Get((int)next_pos.X, (int)next_pos.Y);
+                    var (curr_x, curr_y) = Position(curr_cell);
+                    
+                    Vector2 next_p = new Vector2(curr_x, curr_y);
+                    next_p += MOVE[(int)direction];
+                    Cell next_cell = _grid.Get((int)next_p.X, (int)next_p.Y);
 
                     curr_cell.Open(direction);
                     Direction opposite = (Direction)(((int)direction + 2) % 4);
@@ -75,10 +79,10 @@ namespace Abstracts
             List<Direction> unvisited = new List<Direction>();
             bool[] adjacents =
             [
-                cell.Can(Direction.Up),
-                cell.Can(Direction.Right),
-                cell.Can(Direction.Down),
-                cell.Can(Direction.Left)
+                cell.Can(Direction.Up) ? true : false,
+                cell.Can(Direction.Right) ? true : false,
+                cell.Can(Direction.Down) ? true : false,
+                cell.Can(Direction.Left) ? true : false
             ];
             if (adjacents[0] && !_visited[iterator - _grid.Width]) unvisited.Add(Direction.Up);
             if (adjacents[1] && !_visited[iterator + 1]) unvisited.Add(Direction.Right);
@@ -86,10 +90,16 @@ namespace Abstracts
             if (adjacents[3] && !_visited[iterator - 1]) unvisited.Add(Direction.Left);
             return unvisited;
         }
+        
+        private (int, int) Position(Cell cell)
+        {
+            return ((int)cell.Position.X / Cell.WIDTH, (int)cell.Position.Y / Cell.HEIGHT);
+        }
 
         private int Iterator(Cell cell)
         {
-            return (int)cell.Position.X / Cell.WIDTH + (int)cell.Position.Y / Cell.HEIGHT * _grid.Width;
+            var (x, y) = Position(cell);
+            return y * _grid.Width + x;
         }
     }
 }

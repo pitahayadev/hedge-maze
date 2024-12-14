@@ -17,9 +17,9 @@ namespace Abstracts
                 for (int j = 0; j < Height; j++)
                 {
                     // int index = (i * Width) + j;
-                    // without walls: (8 + i * Cell.WIDTH, 8 + j * Cell.HEIGHT)
-                    int x = i + 8 + i * Cell.WIDTH;
-                    int y = j + 8 + j * Cell.HEIGHT;
+                    // with walls: (i||j + 8 + i * Cell.WH)
+                    int x = 8 + i * Cell.WIDTH;
+                    int y = 8 + j * Cell.HEIGHT;
                     Cells[i, j] = Factory.Instantiate(x, y);
                 }
             }

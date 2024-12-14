@@ -6,8 +6,8 @@ namespace Abstracts
         {
             int pt = 8;
             int pl = 8;
-            int w = 1152;
-            int h = 1024;
+            int w = 1096;
+            int h = 968;
 
             if (x == pl)
             {
