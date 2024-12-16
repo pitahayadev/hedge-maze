@@ -31,5 +31,7 @@ namespace Abstracts
                     break;
             }
         }
+
+        public override int Wall(int index) => base.Wall(index);
     }
 }

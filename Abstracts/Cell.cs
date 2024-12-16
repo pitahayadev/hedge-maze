@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using static Abstracts.IPathable;
 
 namespace Abstracts
 {
@@ -29,5 +28,15 @@ namespace Abstracts
 
         public abstract bool Can(Direction direction);
         public abstract void Open(Direction direction);
+        public virtual int Wall(int index)
+        {
+            return index switch
+            {
+                0 => (int)Walls.X,
+                1 => (int)Walls.Y,
+                2 => (int)Walls.Z,
+                _ => (int)Walls.W
+            };
+        }
     }
 }

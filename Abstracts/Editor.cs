@@ -27,23 +27,23 @@ namespace Abstracts
                     {
                         if(cell.Walls.X == 1 && tile.Y == cell.Position.Y)
                         {
-                            SingleTile(tile.X, tile.Y, Color.Red);
+                            SingleTile(tile.X, tile.Y, Color.PaleGoldenrod);
                         }
                         else if(cell.Walls.Y == 1 && tile.X == cell.Position.X + Cell.WIDTH - Tile.WIDTH)
                         {
-                            SingleTile(tile.X, tile.Y, Color.Blue);
+                            SingleTile(tile.X, tile.Y, Color.PaleGoldenrod);
                         }
                         else if(cell.Walls.Z == 1 && tile.Y == cell.Position.Y + Cell.HEIGHT - Tile.HEIGHT)
                         {
-                            SingleTile(tile.X, tile.Y, Color.Yellow);
+                            SingleTile(tile.X, tile.Y, Color.PaleGoldenrod);
                         }
                         else if(cell.Walls.W == 1 && tile.X == cell.Position.X)
                         {
-                            SingleTile(tile.X, tile.Y, Color.White);
+                            SingleTile(tile.X, tile.Y, Color.PaleGoldenrod);
                         }
                         else
                         {
-                            SingleTile(tile.X, tile.Y, Color.LimeGreen);
+                            SingleTile(tile.X, tile.Y, Color.DarkOliveGreen);
                         }
                     }
                 }

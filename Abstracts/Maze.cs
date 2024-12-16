@@ -25,7 +25,7 @@ namespace Abstracts
 
         public void Backtrack()
         {
-            if(!Array.Exists(_visited, i => i == false))
+            if (!Array.Exists(_visited, i => i == false))
             {
                 return;
             }
@@ -36,8 +36,8 @@ namespace Abstracts
                 int y = Random.Shared.Next(_grid.Height);
                 Cell first = _grid.Get(x, y);
                 stack.Push(first);
-                
-                while(stack.Count > 0)
+
+                while (stack.Count > 0)
                 {
                     Cell curr_cell = stack.Peek();
                     int curr_index = Iterator(curr_cell);
@@ -60,20 +60,20 @@ namespace Abstracts
                     }
 
                     var (curr_x, curr_y) = Position(curr_cell);
-                    
+
                     Vector2 next_p = new Vector2(curr_x, curr_y);
                     next_p += MOVE[(int)direction];
                     Cell next_cell = _grid.Get((int)next_p.X, (int)next_p.Y);
+                    Direction opposite = (Direction)(((int)direction + 2) % 4);
+                    int numeric = (int)opposite;
 
                     curr_cell.Open(direction);
-                    Direction opposite = (Direction)(((int)direction + 2) % 4);
                     next_cell.Open(opposite);
-
                     stack.Push(next_cell);
                 }
             }
         }
-        
+
         private List<Direction> UnvisitedAdjacents(Cell cell, int iterator)
         {
             List<Direction> unvisited = new List<Direction>();
@@ -90,7 +90,7 @@ namespace Abstracts
             if (adjacents[3] && !_visited[iterator - 1]) unvisited.Add(Direction.Left);
             return unvisited;
         }
-        
+
         private (int, int) Position(Cell cell)
         {
             return ((int)cell.Position.X / Cell.WIDTH, (int)cell.Position.Y / Cell.HEIGHT);
