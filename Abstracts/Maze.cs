@@ -30,7 +30,7 @@ namespace Abstracts
         
         private List<Direction> UnvisitedAdjacents(int iterator)
         {
-            Cell cell = At(iterator);
+            Cell cell = Reference(iterator);
             List<Direction> list = new List<Direction>();
             bool[] array =
             [
@@ -46,14 +46,26 @@ namespace Abstracts
             return list;
         }
         
-        private Cell At(int numeric)
+        private Cell Reference(int numeric)
         {
-            int x = numeric % _grid.Height;
-            int y = numeric / _grid.Height;
-            return _grid.Get(x, y);
+            if (numeric < _grid.Width * _grid.Height)
+            {
+                int x = numeric / _grid.Width;
+                int y = numeric % _grid.Width;
+                return _grid.Get(x, y);
+            }
+            else
+            {
+                return _grid.Get(_grid.Width - 1, _grid.Height -1);
+            }
         }
 
-        private int Iterator(int x, int y)
+        private (int, int) Coordinates(Cell cell)
+        {
+            return ((int)cell.Position.X / Cell.WIDTH, (int)cell.Position.Y / Cell.HEIGHT);
+        }
+
+        private int Index(int x, int y)
         {
             return (x * _grid.Width) + y;
         }
@@ -69,10 +81,10 @@ namespace Abstracts
                 for(int j = 0; j < _grid.Width; j++)
                 {
                     h = j;
-                    int ij = Iterator(i, j);
+                    int ij = Index(i, j);
                     int checkHor = ij / _grid.Width;
                     int checkVer = ij % _grid.Width;
-                    int wh = Iterator(w, h);
+                    int wh = Index(w, h);
                     int checkWid = wh / _grid.Width;
                     int checkHei = wh % _grid.Width;
                     Console.WriteLine($"N:{ij}");
