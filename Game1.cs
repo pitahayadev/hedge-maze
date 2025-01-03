@@ -37,7 +37,7 @@ namespace hedge_maze
         {
             _grid = new Grid(18, 16);
             _maze = new Maze(_grid);
-            _maze.Backtrack();
+            _maze.check();
             _editor = new Editor(GraphicsDevice);
         }
 
