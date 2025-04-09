@@ -2,29 +2,28 @@ namespace Abstracts
 {
     public static class Factory
     {
+        private const int Origin = 8;
+        private const int Width = 1096;
+        private const int Height = 968;
+
         public static Cell Instantiate(int x, int y)
         {
-            int pt = 8;
-            int pl = 8;
-            int w = 1096;
-            int h = 968;
-
-            if (x == pl)
+            if (x == Origin)
             {
-                if (y == pt) return new TopLeft(x, y);
-                if (y == h) return new BottomLeft(x, y);
+                if (y == Origin) return new TopLeft(x, y);
+                if (y == Height) return new BottomLeft(x, y);
                 return new Left(x, y);
             }
 
-            if (x == w)
+            if (x == Width)
             {
-                if (y == pt) return new TopRight(x, y);
-                if (y == h) return new BottomRight(x, y);
+                if (y == Origin) return new TopRight(x, y);
+                if (y == Height) return new BottomRight(x, y);
                 return new Right(x, y);
             }
 
-            if (y == pt) return new Top(x, y);
-            if (y == h) return new Bottom(x, y);
+            if (y == Origin) return new Top(x, y);
+            if (y == Height) return new Bottom(x, y);
             return new Inner(x, y);
         }
     }
